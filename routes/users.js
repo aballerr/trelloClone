@@ -46,8 +46,6 @@ router.post('/authenticate', (req, res, next) => {
       });
     }
 
-    console.log(user)
-
     User.comparePassword(password, user.password, (err, isMatch) => {
       if (err) throw err;
 
@@ -74,9 +72,7 @@ router.post('/authenticate', (req, res, next) => {
 
 
 router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-  //res.send('profile');
-  const user = _.omit(req.user.toObject(), 'password');
-
+  var user = _.omit(req.user.toObject(), 'password');
 
   res.json({ user: user })
 });

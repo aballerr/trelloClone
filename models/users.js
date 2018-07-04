@@ -20,6 +20,10 @@ const UserSchema = mongoose.Schema({
   boards: {
     type: Array,
     default: []
+  },
+  nextBoardID: {
+    type: Number,
+    default: 1
   }
 })
 
@@ -75,4 +79,11 @@ module.exports.update = function(query, update, callback){
   User.findOneAndUpdate(query, update, (err,success) => {
     callback(err, success)
   })
+}
+
+module.exports.getNextBoardID = function(user, callback) {
+
+  user.nextBoardID = user.nextBoardID + 1
+
+  user.save(callback)
 }

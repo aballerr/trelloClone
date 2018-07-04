@@ -3,40 +3,102 @@ const config = require('../config/database')
 
 
 
-const ListSchema = mongoose.Schema ({
-    listName: {
-      type: String,
-      required: true 
-    },
-    items: {
-      type: Array,
-      default: []
+
+
+
+
+module.exports.addList = function (req, callback) {
+    var user = req.user;
+    var boards = user.boards;
+    var boardID = req.body.boardID
+    var listName = req.body.listName;
+    var items = req.body.items
+
+
+    for (var i in boards) {
+        if (boards[i].boardID == boardID) {
+            var board = boards[i]
+            var newList = {
+                listName: listName,
+                listID: board.nextListID++,
+                items: items == undefined ? [] : items
+            }
+            board.lists.push(newList)
+        }
     }
-  })
+
+    user.markModified('boards')
+    user.save(callback)
+}
+
+module.exports.updateListName = function (req, callback) {
+    var listID = req.body.listID;
+    var boardID = req.body.boardID;
+    var newListName = req.body.newListName;
+
+    var boards = req.user.boards;
+
+    for (var i in boards) {
+        if (boards[i].boardID == boardID) {
+            var lists = boards[i].lists;
+            for (var j in lists) {
+                if (lists[j].listID == listID) {
+                    lists[j].listName = newListName
+                }
+            }
+        }
+    }
+
+    req.user.markModified('boards')
+    req.user.save(callback)
+}
 
 
+module.exports.getList = function (req, callback) {
+    var boards = req.user.boards;
+    var listID = req.params.listID;
+    var boardID = req.query.boardID;
+    var list;
+
+    for (var i in boards) {
+        if (boards[i].boardID == boardID) {
+            var lists = boards[i].lists;
+            for (var j in lists) {
+                if (lists[j].listID == listID) {
+                    list = list[j]
+                    callback(null, list)
+                }
+            }
+        }
+    }
+
+    if (list == undefined) {
+        callback("USER NOT FOUND", null)
+    }
+}
 
 
+module.exports.getLists = function (req, callback) {
+    var boardID = req.query.boardID;
+    var boards = req.user.boards;
+    var board;
 
-  const List = module.exports = mongoose.model('List', ListSchema)
+    for (var i in boards) {
+        if (boards[i].boardID == boardID) {
+            board = boards[i]
+        }
+    }
 
+    if (board == undefined) {
+        callback("board does not exist", null)
+    }
+    else {
+        callback(null, board.lists)
+    }
+}
 
-
-
-  module.exports.addList = function (List, callback) {
-    List.save(callback)
-  }
-
-  module.exports.updateListName = function(listID, newListName, options, callback){
-    var query = { _id: listID }
-
-    List.findOneAndUpdate(query, { $set: { listName: newListName } },{}, callback)
-  }
-
-
-  module.exports.getList = function(listID, callback) {
-      var query = { _id: listID }
-      
-      List.findOne(query, callback)
-  }
-
+module.exports.deleteList = function (req, callback) {
+    var boardID = req.body.boardID;
+    var listID = req.body.listID;
+    var user = req.user;
+}

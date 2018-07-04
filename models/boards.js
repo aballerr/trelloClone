@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const config = require('../config/database')
+const User = require('./users')
 
 
 /**
@@ -8,85 +9,92 @@ const config = require('../config/database')
 
 
 
-const BoardSchema = mongoose.Schema({
-  boardName: {
-    type: String,
-    required: true
-  },
-  lists: {
-    type: Array,
-    default: []
+
+
+module.exports.addBoard = function (req, callback) {
+  var user = req.user;
+  var boardName = req.body.boardName;
+  var boardID = user.nextBoardID;
+
+  var newBoard = {
+    boardID: boardID,
+    boardName: boardName,
+    lists: [],
+    nextListID: 1 
   }
-})
 
+  req.user.boards.push(newBoard)
+  req.user.save((err, success) => {
+    if (err) {
+      callback(err, null)
+    }
+    else {
+      User.getNextBoardID(user, callback)
+    }
+  })
 
-
-
-
-const Board = module.exports = mongoose.model('Board', BoardSchema)
-
-
-
-/**
- * adds a board to both the boards collection in mongo and a board to the current user lists of boards
- * @param {mogoose board schema} board 
- * @param {*} callback 
- */
-module.exports.addBoard = function (board, callback) {
-  board.save(callback)
 }
 
 
+//db.users.update({email: "aball1997@gmai.com"}, {$pull: {boards: {boardID: 1}}});
 
-/**
- * pass in a board object with the id of the board you would like to remove
- * @param {object} user 
- * @param {object} boardToRemove - {board: _id}
- * @param {function} callback 
- */
-module.exports.deleteBoard = function (user, boardToRemove, callback) {
+module.exports.deleteBoard = function (req, callback) {
+  var boardID = parseInt(req.body.boardID)
+  var query = { _id: req.user._id }
+  var update = {$pull: {boards: {boardID: boardID}}}
+
+  User.findOneAndUpdate(query, update, null,  callback)
+}
 
 
-  Board.find({ _id: boardToRemove._id }).remove((err, success) => {
-    var boards = user.toObject().boards
-    if (err) {
-      callback(err, "");
+module.exports.updateBoardName = function (req, callback) {
+  var query = ({"_id": req.user._id},{boards: {$elemMatch: {boardID: parseInt(req.body.boardID)}}})
+
+
+  User.findOne(query, (err, user) => {
+    if(err){
+      console.log(err)
     }
     else {
-      var board;
-      for (var i in boards) {
-        board = boards[i]
-        if (board == boardToRemove._id) {
-          boards = boards.splice(1, i);
+      
+      for(var i in user.boards){
+        if(user.boards[i].boardID == req.body.boardID) {
+          user.boards[i].boardName = req.body.boardName
         }
       }
-      user.boards = boards;
+      user.markModified('boards')
       user.save(callback)
     }
   })
 }
 
 
-module.exports.updateBoardName = function (boardName, boardID, options, callback) {
-  var query = { _id: boardID }
 
-  Board.findOneAndUpdate(query, { $set: { boardName: boardName } }, options, callback)
+  //var query = ({"_id": req.user._id},{boards: {$elemMatch: {boardID:boardID}}})
+module.exports.getBoardById = function(req, callback) {
+  var boardID = parseInt(req.params.boardID)
+  var boards = req.user.toObject().boards;
+  var board;
+
+  for(var i in boards){boardID
+    if (boards[i].boardID == boardID){
+      board = boards[i]
+    }
+  }
+
+  if(board == undefined){
+    callback(null, "board does not exist")
+  }
+  else {
+    callback(null, board)
+  }
 }
 
 
-module.exports.addList = function (boardID, list, options,  callback) {
-  var query = { _id: boardID }
 
-  Board.findOneAndUpdate(query, { $push: { lists: list } }, options, (err, success) => {
-    if(err){
-      callback(err, null)
-    }
-    else {
-      Board.find(query, callback)
-    }
-  })
+module.exports.getAllBoards = function(req, callback) {
+  var boards = req.user.boards;
+
+  callback(null, boards)
 
 }
-
-
-module.exports.getBoard
