@@ -3,12 +3,6 @@ const config = require('../config/database')
 const User = require('./users')
 
 
-/**
- * TODO: need a put request to update the name of a board
- */
-
-
-
 
 
 module.exports.addBoard = function (req, callback) {
@@ -32,11 +26,9 @@ module.exports.addBoard = function (req, callback) {
       User.getNextBoardID(user, callback)
     }
   })
-
 }
 
 
-//db.users.update({email: "aball1997@gmai.com"}, {$pull: {boards: {boardID: 1}}});
 
 module.exports.deleteBoard = function (req, callback) {
   var boardID = parseInt(req.body.boardID)
@@ -54,6 +46,7 @@ module.exports.updateBoardName = function (req, callback) {
   User.findOne(query, (err, user) => {
     if(err){
       console.log(err)
+      callback({error: "findOne error"}, null)
     }
     else {
       

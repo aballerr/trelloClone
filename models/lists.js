@@ -2,11 +2,6 @@ const mongoose = require('mongoose')
 const config = require('../config/database')
 
 
-
-
-
-
-
 module.exports.addList = function (req, callback) {
     var user = req.user;
     var boards = user.boards;
@@ -100,5 +95,24 @@ module.exports.getLists = function (req, callback) {
 module.exports.deleteList = function (req, callback) {
     var boardID = req.body.boardID;
     var listID = req.body.listID;
-    var user = req.user;
+    var boards = req.user.boards;
+    var lists, success=false;
+
+    
+    for(var i in boards){
+        if(boards[i].boardID == boardID){
+            lists = boards[i].lists;
+       
+            for(var j in lists){
+          
+                
+                if(lists[j].listID == listID){          
+                    lists.splice(j, 1)       
+                }
+            }
+        }
+    }
+
+    req.user.markModified('boards')
+    req.user.save(callback)
 }

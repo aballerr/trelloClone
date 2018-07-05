@@ -1,12 +1,8 @@
 const express = require('express')
 const router = express.Router();
-const User = require('../models/users')
 const Board = require('../models/boards')
-const jwt = require('jsonwebtoken');
-const config = require('../config/database')
 const passport = require('passport')
-var _ = require('lodash')
-var callback = require('../utilities/callback')
+
 
 
 
