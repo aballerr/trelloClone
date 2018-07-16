@@ -9,6 +9,8 @@ var _ = require('lodash')
 
 router.post('/signup', (req, res) => {
   var user = req.body.user
+  console.log(user)
+  console.log(req.body)
   let newUser = new User({
     email: user.email,
     password: user.password
@@ -33,8 +35,9 @@ router.post('/signup', (req, res) => {
 
 
 router.post('/authenticate', (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  var user = req.body.user
+  const email = user.email;
+  const password = user.password;
 
   User.getUserByEmail(email, (err, user) => {
     if (err) throw err;

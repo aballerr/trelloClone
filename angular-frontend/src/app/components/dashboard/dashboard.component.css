@@ -1,0 +1,195 @@
+
+.boards-container {
+    position: absolute;
+    height: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+
+.boards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1em;
+    justify-items: center;
+    /* border: 1px solid black; */
+
+}
+
+/* .boards > div:nth-of-type(odd) {
+    background: url("../../../assets/images/flowers.jpg")
+}
+
+.boards > div:nth-of-type(even) {
+    background: url("../../../assets/images/tattoo.jpg")
+} */
+
+
+
+.board {
+    width: 200px;
+    height: 110px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: lightcyan;
+    cursor: pointer;
+    
+}
+
+.board:hover {
+   
+    background: none;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    transition: box-shadow 0.5;
+
+
+}
+
+
+
+label {
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+.create {
+    background: #F0F0F0;
+    text-align: center;
+    padding-top: 40px;
+    cursor: pointer;
+}
+
+.create:hover {
+    color: black;
+    background-color: #888888;
+    transition: all 0.2s;
+}
+
+
+.add-board-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    visibility: hidden;
+
+}
+
+.add-board {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    top: 15%;
+    padding: 30px;
+    /* background-color:rgba(225,255,255, 0.4); */
+    background: url("../../../assets/images/pillars.jpg");
+    border-radius: 4px;
+
+}
+
+.add-board::after {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.visible {
+    visibility: visible
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    width: 50%;
+    font-size: 20px;
+    margin-top: 16px;
+    margin-bottom: 0px;
+    opacity: 0.5;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    user-select: none;
+}
+
+button:hover {
+    background-color: white;
+}
+
+input {
+    font-weight: bold;
+    opacity: 1.0;
+    background-color: rgba(0,0,0,0);
+    outline: none;
+    border: none;
+    color: white;
+    padding-left: 10px;
+}
+
+input:hover {
+    background-color: rgba(255,255,255, 0.4);
+}
+
+input::placeholder {
+    color: white;
+}
+
+#exit {
+    position: absolute;
+    right: 10px;
+    top: -6px;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+
+h5 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* simple image background */
+
+
+.camera {
+    background: url("../../../assets/images/camera.jpg")
+}
+
+.desk {
+    background: url("../../../assets/images/desk.jpg")
+}
+.face {
+    background: url("../../../assets/images/face.jpg")
+}
+.flowers {
+    background: url("../../../assets/images/flowers.jpg")
+}
+.monet {
+    background: url("../../../assets/images/monet.jpg")
+}
+.mountains {
+    background: url("../../../assets/images/mountains.jpg")
+}
+.new-york {
+    background: url("../../../assets/images/new-york.jpg")
+}
+.pillars {
+    background: url("../../../assets/images/pillars.jpg")
+}
+.tattoo {
+    background: url("../../../assets/images/tattoo.jpg")
+}

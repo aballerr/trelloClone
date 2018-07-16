@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="title">
+    <h1>Create a Trello Account</h1>
+    <label>
+      <span class="none">or</span><a class="link" href="/login"> <span class="link"> sign in to your account</span></a>
+    </label>
+  </div>
+
+  <!-- <h3>Log in to Trello</h3> -->
+  <form action="">
+    <fieldset>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="email" [(ngModel)]="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+          type="email">
+        <label id="password" for="exampleInputPassword1">Password</label>
+        <input name="password" [(ngModel)]="password" class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
+        <button (click)="loginUser()" type="submit" class="btn btn-primary form-control">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+</div>

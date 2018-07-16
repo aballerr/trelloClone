@@ -1,0 +1,46 @@
+.container {
+    width: 30%;
+    transform: translateY(40%)
+}
+
+button {
+    margin-top: 30px;
+}
+
+label {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+
+h1 {
+
+    font-size: 60px;
+    text-transform: none;
+    
+    
+}
+
+.link{
+    text-decoration: underline;
+    color: #0084FF;
+    cursor: pointer;
+}
+
+.none {
+    color: black;
+}
+
+
+.title label {
+    margin-top: 0px;    
+
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+#password {
+    margin-top: 25px;
+}

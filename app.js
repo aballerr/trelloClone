@@ -4,12 +4,14 @@ const databaseConfig = require('./config/database')
 const bodyParser = require('body-parser')
 const app = express()
 const passport = require('passport')
+const cors = require('cors');
 
 
 
 
 
 app.use(bodyParser())
+app.use(cors())
 const port = 3000;
 
 

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="boards-container">
+    <h5>Personal Boards</h5>
+    <div class="boards">
+      <div class="board {{board.class}}" *ngFor="let board of boards">
+        <div class="screen"></div>
+        <label>{{board.boardName}}</label>
+      </div>
+      <div (click)="toggleAddBoard()" class="board create">
+        Create new board...
+      </div>
+    </div>
+  </div>
+</div>
+
+<div (click)="toggleAddBoard()" class="add-board-container">
+
+  <div (click)="toggleAddBoard()" class="add-board">
+    <span (click)="toggleAddBoard()" id="exit">x</span>
+    <div class="flex-column">
+      <input [(ngModel)]="boardName" type="text" placeholder="Add board title">
+      <button (click)="addBoard()">Create Board</button>
+    </div>
+  </div>
+
+
+</div>

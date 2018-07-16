@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Log In to Trello</h1>
+  <form action="">
+    <fieldset>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="email" [(ngModel)]="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+          type="email">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="password" [(ngModel)]="password" class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
+        <button (click)="loginUser()" type="submit" class="btn btn-primary form-control">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+</div>
