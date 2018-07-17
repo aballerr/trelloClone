@@ -2,7 +2,7 @@
   <div class="boards-container">
     <h5>Personal Boards</h5>
     <div class="boards">
-      <div class="board {{board.class}}" *ngFor="let board of boards">
+      <div (click)="goToBoard(board.boardID)" class="board {{board.class}}" *ngFor="let board of boards">
         <div class="screen"></div>
         <label>{{board.boardName}}</label>
       </div>

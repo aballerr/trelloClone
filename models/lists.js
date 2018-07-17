@@ -10,6 +10,7 @@ module.exports.addList = function (req, callback) {
     var items = req.body.items
 
 
+
     for (var i in boards) {
         if (boards[i].boardID == boardID) {
             var board = boards[i]
@@ -18,6 +19,8 @@ module.exports.addList = function (req, callback) {
                 listID: board.nextListID++,
                 items: items == undefined ? [] : items
             }
+
+            console.log(newList);
             board.lists.push(newList)
         }
     }
@@ -26,19 +29,29 @@ module.exports.addList = function (req, callback) {
     user.save(callback)
 }
 
-module.exports.updateListName = function (req, callback) {
-    var listID = req.body.listID;
-    var boardID = req.body.boardID;
-    var newListName = req.body.newListName;
 
-    var boards = req.user.boards;
+
+
+module.exports.updateList = function (req, callback) {
+    var list = req.body.list;
+    var listID = list.listID;
+    var boardID = req.body.boardID;
+    var boards = req.user.boards
+
+    console.log(req.body);
+
+    console.log(listID)
+
 
     for (var i in boards) {
+
         if (boards[i].boardID == boardID) {
             var lists = boards[i].lists;
             for (var j in lists) {
                 if (lists[j].listID == listID) {
-                    lists[j].listName = newListName
+                    console.log("does this run")
+                    lists[j].listName = list.listName;
+                    lists[j].items = list.items;
                 }
             }
         }
@@ -96,18 +109,18 @@ module.exports.deleteList = function (req, callback) {
     var boardID = req.body.boardID;
     var listID = req.body.listID;
     var boards = req.user.boards;
-    var lists, success=false;
+    var lists, success = false;
 
-    
-    for(var i in boards){
-        if(boards[i].boardID == boardID){
+
+    for (var i in boards) {
+        if (boards[i].boardID == boardID) {
             lists = boards[i].lists;
-       
-            for(var j in lists){
-          
-                
-                if(lists[j].listID == listID){          
-                    lists.splice(j, 1)       
+
+            for (var j in lists) {
+
+
+                if (lists[j].listID == listID) {
+                    lists.splice(j, 1)
                 }
             }
         }

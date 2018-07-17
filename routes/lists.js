@@ -19,7 +19,7 @@ router.post('/lists', passport.authenticate('jwt', { session: false }), (req, re
 
 
 router.put('/lists', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    List.updateListName(req, (err, success) => {
+    List.updateList(req, (err, success) => {
         if(err){
             console.log(err)
             res.send({error: err})
