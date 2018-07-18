@@ -1,39 +1,24 @@
 <h1>{{boardName}}</h1>
-  
+<div class="wrap">
 <div class="lists">
 
 
   <div class="list" *ngFor="let list of lists">
-    <div class="title"><h5>{{list.listName}}</h5><span class="delete">X</span></div>
-    
+    <div class="title"><h3>{{list.listName}}</h3><span class="delete">X</span></div>
     <div class="items">
       <div class="item" *ngFor="let item of list.items;let i = index; trackBy: trackByFn">
-        <input class="added-item" type="text" [(ngModel)]="list.items[i]">
+        <input (keyup.enter)="updateList(list)" class="added-item" type="text" [(ngModel)]="list.items[i]">
       </div>
     </div>
-
     <div class="input-container">
       <input (click)="focus($event)" (blur)="focus($event)" class="new-item" (keyup.enter)="updateList(list)" [(ngModel)]="list.nextItem"
         type="text" placeholder="+ Add item to list..">
     </div>
-
-
     <button class="btn btn-success btn-margin save" (click)="updateList(list)">Add Card</button>
-
-
   </div>
-  <div class="list">
 
-
-    <div class="items">
-      <div class="item" *ngFor="let item of items">
-        {{item}}
-      </div>
-    </div>
-    <div class="input-container">
-      <input (keyup.enter)="onEnter()" class="form-control" [(ngModel)]="value" type="text" placeholder="{{placeholderText}}">
-    </div>
-
-    <button class="btn btn-success btn-margin" (click)="addToList()">Save List</button>
+  <div class="list new">
+      <input [(ngModel)]="newListName" class="new-item" (keyup.enter)="addToList(newListName)" placeholder="+ Add item to list..">
   </div>
+</div>
 </div>

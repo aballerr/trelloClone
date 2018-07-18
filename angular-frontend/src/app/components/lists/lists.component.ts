@@ -13,10 +13,6 @@ export class ListsComponent implements OnInit {
   private board: Object;
   private boardName: string;
   private boardID: string;
-  private value: string;
-
-  private items = []
-  private listName;
   private lists;
 
 
@@ -26,18 +22,15 @@ export class ListsComponent implements OnInit {
 
   }
 
+  ngOnInit() {
+    this.getBoardInfo();
+  }
 
-  // customTrackBy(index: number, obj: any): any {
-  //   return index;
-  // }
   trackByFn(index, item) {
     return index; // or item.id
   }
 
-  ngOnInit() {
-    this.getBoardInfo();
 
-  }
 
 
   focus() {
@@ -72,19 +65,17 @@ export class ListsComponent implements OnInit {
         }
       })
     })
-
-
   }
 
-  addToList(listID) {
-    if (this.value == undefined || this.value == "") {
+
+  addToList(newListName) {
+    if (newListName == undefined || newListName == "") {
 
     }
-    else (this.listName == undefined){
-      this.listName = this.value
+    else {
       var list = {
-        listName: this.listName,
-        items: this.items
+        listName: newListName,
+        items: []
       }
 
       this.networkCommandsService.postList(this.boardID, list).subscribe(data => {
@@ -99,9 +90,7 @@ export class ListsComponent implements OnInit {
           }
         })
       })
-
     }
-    this.value = "";
   }
 
   getBoardInfo() {

@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  angular: # name of the first service
+    build: angular-frontend # specify the directory of the Dockerfile
+    ports:
+      - "4200:4200"
+  express:
+    build: server
+    volumes:
+      - ./server:/usr/src/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    restart: always
+    # volumes:
+    #   - /data/mongodb/db:/data/db
+    ports:
+      - "27018:27017"
