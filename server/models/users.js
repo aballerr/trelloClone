@@ -3,7 +3,6 @@ const config = require('../config/database')
 const bcrypt = require('bcryptjs');
 
 
-
 const UserSchema = mongoose.Schema({
   name: {
     type: String
@@ -26,7 +25,6 @@ const UserSchema = mongoose.Schema({
     default: 1
   }
 })
-
 const User = module.exports = mongoose.model('User', UserSchema)
 
 
@@ -57,10 +55,7 @@ module.exports.getUserByName = function (name, callback) {
 }
 
 
-
 module.exports.comparePassword = function (candidatePassword, hash, callback) {
-  console.log(candidatePassword)
-  console.log(hash)
   bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
     if (err) throw err;
     callback(null, isMatch);
@@ -68,11 +63,9 @@ module.exports.comparePassword = function (candidatePassword, hash, callback) {
 }
 
 
-
 module.exports.update = function(boardID, callback){
 
 }
-
 
 
 module.exports.update = function(query, update, callback){
@@ -81,9 +74,9 @@ module.exports.update = function(query, update, callback){
   })
 }
 
+
 module.exports.getNextBoardID = function(user, callback) {
 
   user.nextBoardID = user.nextBoardID + 1
-
   user.save(callback)
 }

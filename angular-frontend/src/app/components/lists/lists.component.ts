@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { NetworkCommandsService } from '../../services/network-commands.service';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import * as autosize from 'autosize';
 
 @Component({
   selector: 'app-lists',
@@ -14,8 +15,9 @@ export class ListsComponent implements OnInit {
   private boardName: string;
   private boardID: string;
   private lists;
-
-
+  private visible = false;
+  private showAddNewListButton = false;
+  private newListName: string;
   private placeholderText = "Add a list title..."
 
   constructor(private authService: AuthService, private networkCommandsService: NetworkCommandsService, private router: Router) {
@@ -23,29 +25,60 @@ export class ListsComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.getBoardInfo();
+    var textarea = document.querySelector('textarea');
+
+
   }
 
   trackByFn(index, item) {
     return index; // or item.id
   }
 
+  resize(event) {
+    var el = event.target || event.srcElement || event.currentTarget;
+    autosize(el);
+  }
 
 
 
-  focus() {
+  focus(event) {
     var target = event.target || event.srcElement || event.currentTarget;
+
+
     $(target).toggleClass('focus');
 
-    var newPlaceHolderText = $(target).attr('placeholder') == '+ Add item to list..' ? 'Enter new item...' : '+ Add item to list..';
-    $(target).attr('placeholder', newPlaceHolderText);
+
   }
 
   loadLists() {
     this.lists = this.board["lists"]
+    this.lists.map((list) => {
+      list.showAddButton = false;
+      return list;
+    })
+    //This needs to be run only once the lists have been loaded
+    this.resizeTextAreas();
+  }
+
+  resizeTextAreas() {
+    $(function () {
+      $("textarea").each(function () {
+        autosize(this)
+      });
+    });
+  }
+
+  showButton(list, event) {
+    list.showAddButton = !list.showAddButton
+    var target = event.target || event.srcElement || event.currentTarget;
+    var newPlaceHolderText = $(target).attr('placeholder') == '+ Add another card' ? 'Enter a title for this card...' : '+ Add another card';
+    $(target).attr('placeholder', newPlaceHolderText);
   }
 
   updateList(list) {
+    
 
     if (list.nextItem == undefined) { }
     else if (list.nextItem.replace(' ', '') == "") { }
@@ -68,13 +101,11 @@ export class ListsComponent implements OnInit {
   }
 
 
-  addToList(newListName) {
-    if (newListName == undefined || newListName == "") {
-
-    }
+  addToList() {
+    if (this.newListName == undefined || this.newListName == "") { }
     else {
       var list = {
-        listName: newListName,
+        listName: this.newListName,
         items: []
       }
 
@@ -87,6 +118,7 @@ export class ListsComponent implements OnInit {
             this.board = board;
             this.boardName = board.boardName;
             this.loadLists();
+            this.newListName = "";
           }
         })
       })
@@ -106,6 +138,15 @@ export class ListsComponent implements OnInit {
         }
       })
     })
+  }
+
+  toggleShow() {
+    var backgroundColor = $('.add').css('background-color') == 'rgba(0, 0, 0, 0.2)' ? '#F5F5F5' : 'rgba(0, 0, 0, 0.2)';
+    var newPlaceHolderText = $('.add-textarea').attr('placeholder') == '+ Add another list' ? 'Enter list title...' : '+ Add another list';
+    $('.add-textarea').attr('placeholder', newPlaceHolderText);
+    $('.add').css('background-color', backgroundColor)
+    $('.add-textarea').toggleClass('show');
+    this.showAddNewListButton = !this.showAddNewListButton;
   }
 
 }

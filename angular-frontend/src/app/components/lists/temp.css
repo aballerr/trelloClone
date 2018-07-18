@@ -151,7 +151,8 @@ button {
 }
 
 .new-item {
-    background-color: rgba(0,0,0, 0.0);
+    /* background-color: rgba(0,0,0, 0.0); */
+    background-color: red;
     font-size: 16px;
   
 }

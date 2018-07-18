@@ -4,7 +4,6 @@ const List = require('../models/lists')
 const passport = require('passport')
 
 
-
 router.post('/lists', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     List.addList(req, (err, success) => {
         if(err){
@@ -68,6 +67,5 @@ router.delete('/lists', passport.authenticate('jwt', {session: false}), (req, re
         }
     })
 })
-
 
 module.exports = router;

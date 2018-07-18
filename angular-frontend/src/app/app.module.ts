@@ -13,7 +13,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ClearComponent } from './components/clear/clear.component';
 import { ListsComponent } from './components/lists/lists.component';
 
 
@@ -33,16 +32,13 @@ const routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
-  },
-  { //this exists simply to logout a user, will need to be changed later
-    path: 'clear',
-    component: ClearComponent
+    component: DashboardComponent, canActivate: [AuthGuard]
   },
   {
     path: 'lists/:boardName',
     component: ListsComponent, canActivate: [AuthGuard]
-  }
+  },
+
 ]
 
 export function tokenGetter() {
@@ -58,7 +54,6 @@ export function tokenGetter() {
     NavbarComponent,
     JsonmapPipe,
     DashboardComponent,
-    ClearComponent,
     ListsComponent
   ],
   imports: [
@@ -70,7 +65,7 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter,
         whitelistedDomains: ['localhost:4200'],
-        blacklistedRoutes: ['localhost:3001/auth/']
+        blacklistedRoutes: []
       }
     })
   ],

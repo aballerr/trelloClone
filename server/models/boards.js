@@ -3,8 +3,6 @@ const config = require('../config/database')
 const User = require('./users')
 
 
-
-
 module.exports.addBoard = function (req, callback) {
   var user = req.user;
   var boardName = req.body.boardName;
@@ -29,7 +27,6 @@ module.exports.addBoard = function (req, callback) {
 }
 
 
-
 module.exports.deleteBoard = function (req, callback) {
   var boardID = parseInt(req.body.boardID)
   var query = { _id: req.user._id }
@@ -42,10 +39,8 @@ module.exports.deleteBoard = function (req, callback) {
 module.exports.updateBoardName = function (req, callback) {
   var query = ({"_id": req.user._id},{boards: {$elemMatch: {boardID: parseInt(req.body.boardID)}}})
 
-
   User.findOne(query, (err, user) => {
     if(err){
-      console.log(err)
       callback({error: "findOne error"}, null)
     }
     else {
@@ -62,8 +57,6 @@ module.exports.updateBoardName = function (req, callback) {
 }
 
 
-
-  //var query = ({"_id": req.user._id},{boards: {$elemMatch: {boardID:boardID}}})
 module.exports.getBoardById = function(req, callback) {
   var boardID = parseInt(req.params.boardID)
   var boards = req.user.toObject().boards;
@@ -84,10 +77,8 @@ module.exports.getBoardById = function(req, callback) {
 }
 
 
-
 module.exports.getAllBoards = function(req, callback) {
   var boards = req.user.boards;
 
   callback(null, boards)
-
 }

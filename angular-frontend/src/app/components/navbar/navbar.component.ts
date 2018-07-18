@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import * as $ from 'jquery';
 
@@ -9,18 +10,14 @@ import * as $ from 'jquery';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
-
-  showLogin(){
-    $('.container').toggleClass('show');
-  }
-
-  clearLogin(){
-    this.authService.logout()
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }

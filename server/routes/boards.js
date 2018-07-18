@@ -4,8 +4,6 @@ const Board = require('../models/boards')
 const passport = require('passport')
 
 
-
-
 router.post('/boards', passport.authenticate('jwt', { session: false }), (req, res, next) => {
  
 
@@ -18,8 +16,6 @@ router.post('/boards', passport.authenticate('jwt', { session: false }), (req, r
         }
     });
 })
-
-
 
 
 router.delete('/boards', passport.authenticate('jwt', { session: false }), (req, res, next) => {
@@ -48,7 +44,6 @@ router.get('/boards', passport.authenticate('jwt', { session: false }), (req, re
 })
 
 
-
 router.get('/boards/:boardID', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     Board.getBoardById(req, (err, user) => {
         if(err){
@@ -56,17 +51,9 @@ router.get('/boards/:boardID', passport.authenticate('jwt', { session: false }),
             res.send({error: err})
         } 
         else {
-            var board;
-
-            for(var i in user.boards){
-
-            }
-
             res.send({result:user})
         }
     })
-
-
 })
 
 router.put('/boards', passport.authenticate('jwt', { session: false }), (req, res, next) => {
@@ -78,8 +65,6 @@ router.put('/boards', passport.authenticate('jwt', { session: false }), (req, re
             res.send({response: response})
         }
     })
-
-
 })
 
 module.exports = router;
