@@ -13,46 +13,52 @@ export class AuthService {
 
   authToken: any;
   user: any;
+  private url: string = "/users";
+  //private url: string = "http://localhost:3000/users"
+  private signUpURL = this.url + '/signup';
+  private authenticateURL = this.url + '/authenticate';
+  private profileURL = this.url + '/profile';
 
-  constructor(private http:Http) {
+
+  constructor(private http: Http) {
 
   }
 
-  registerUser(user){
+  registerUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/signup', user, {headers: headers}).pipe(map(res => res.json()))
-   
+    return this.http.post(this.signUpURL, user, { headers: headers }).pipe(map(res => res.json()))
+
   }
 
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/authenticate', user, {headers: headers}).pipe(map(res => res.json()))
-               
+    return this.http.post(this.authenticateURL, user, { headers: headers }).pipe(map(res => res.json()))
+
   }
 
-  getProfile(){
+  getProfile() {
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/users/profile', {headers: headers}).pipe(map(res => res.json()))
-                
+    return this.http.get(this.profileURL, { headers: headers }).pipe(map(res => res.json()))
+
   }
 
-  loadToken(){
+  loadToken() {
     this.authToken = localStorage.getItem('access_token');
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     this.loadToken();
     const token = localStorage.getItem('access_token');
     return !helper.isTokenExpired(token);
 
   }
 
-  storeUserData(access_token, user){
+  storeUserData(access_token, user) {
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = access_token;

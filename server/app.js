@@ -25,7 +25,7 @@ app.use('/users/boards', lists);
 app.use('/users', boards)
 
 //Connection to MongoDB
-mongoose.connect(databaseConfig.database)
+mongoose.connect(databaseConfig.dockerDatabase)
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'mongodb connection error'))
 
