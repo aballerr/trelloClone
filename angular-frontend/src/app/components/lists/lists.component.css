@@ -1,0 +1,115 @@
+.wrap {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+h1 {
+    font-size: 50px;
+    letter-spacing: 0px;
+    color: #298FCA;
+    text-transform: none;
+}
+
+
+
+/** list(s) styling **/
+.lists {
+    margin-top: 50px;
+    float: left;
+}
+
+.list {
+    background-color: #F5F5F5;
+    margin-right: 20px;
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.list-textarea {
+    overflow:hidden;
+    height: auto;
+    padding:10px;
+    width: 100%;
+    outline: none;
+    display:block;
+    border-radius: 3px;
+    resize: none;
+    border: none;
+    margin-top: 10px;
+}
+
+/* list headings */
+h3 {
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2px;
+    letter-spacing: 0px;
+    text-transform: none;
+}
+
+
+.new {
+    background-color: rgba(0,0,0,0);
+}
+
+.new:focus {
+    background-color: white;
+}
+
+.add-button {
+    background-color: #61BD4F;
+    color: white;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.add-button:hover {
+    background-color: #49852E;
+    transition: background-color 500ms linear;;
+}
+
+/* css for div that adds a new list */
+.add {
+    background-color: rgba(0,0,0, 0.2);
+    color: white;
+    padding: 5px;
+}
+
+.add-textarea{
+    background-color: rgba(0,0,0,0.0);
+    padding:10px;
+    width: 100%;
+    border-radius: 3px;
+    overflow:hidden;
+    height: auto;
+    outline: none;
+    display:block;
+    resize: none;
+    border: none;
+}
+
+.show {
+    background-color: white;
+}
+
+.exit-button {
+    display: inline-block;
+    color: lightgray;
+    background-color: red;
+    font-size: 35px;
+    margin-left: 15px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+
+}
+/* END LIST STYLING */
+
