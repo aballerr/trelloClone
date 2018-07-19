@@ -13,8 +13,8 @@ export class AuthService {
 
   authToken: any;
   user: any;
-  private url: string = "/users";
-  //private url: string = "http://localhost:3000/users"
+  //private url: string = "/users";
+  private url: string = "http://localhost:3000/users"
   private signUpURL = this.url + '/signup';
   private authenticateURL = this.url + '/authenticate';
   private profileURL = this.url + '/profile';
@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   registerUser(user) {
+  
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.signUpURL, user, { headers: headers }).pipe(map(res => res.json()))

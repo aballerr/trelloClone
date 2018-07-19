@@ -4,8 +4,6 @@
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <!-- <button *ngIf="authService.isLoggedIn()" (click)="clearLogin()" type="button" class="btn btn-primary">clear login</button> -->
-
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav">
       <li [routerLink]="['/dashboard']" *ngIf="authService.isLoggedIn()" class="nav-item active">
@@ -18,13 +16,12 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li (click)="showLogin()" *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']" class="nav-item">
+      <li *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']" class="nav-item">
         <a class="nav-link">Log in</a>
       </li>
       <li *ngIf="!authService.isLoggedIn()" [routerLink]="['/register']" class="nav-item">
         <a class="nav-link">Register</a>
       </li>
-      <!-- <li *ngIf="authService.isLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">Dashboard</a></li> -->
     </ul>
   </div>
 </nav>

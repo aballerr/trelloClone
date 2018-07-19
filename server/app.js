@@ -27,9 +27,9 @@ app.use('/users/boards', lists);
 app.use('/users', boards)
 
 //Connection to MongoDB
-// mongoose.connect(databaseConfig.dockerDatabase)
-// var db = mongoose.connection
-// db.on('error', console.error.bind(console, 'mongodb connection error'))
+mongoose.connect(databaseConfig.dockerDatabase)
+var db = mongoose.connection
+db.on('error', console.error.bind(console, 'mongodb connection error'))
 
 app.use(express.static(path.join(__dirname, '../angular-frontend/dist/angular-frontend')));
 

@@ -14,7 +14,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ListsComponent } from './components/lists/lists.component';
-
+import { HomeComponent } from './components/home/home.component';
 
 
 const routes = [
@@ -38,6 +38,10 @@ const routes = [
     path: 'lists/:boardName',
     component: ListsComponent, canActivate: [AuthGuard]
   },
+  {
+    path: '',
+    component: HomeComponent
+  }
 
 ]
 
@@ -54,7 +58,8 @@ export function tokenGetter() {
     NavbarComponent,
     JsonmapPipe,
     DashboardComponent,
-    ListsComponent
+    ListsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

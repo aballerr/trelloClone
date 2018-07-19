@@ -9,8 +9,6 @@ var _ = require('lodash')
 
 router.post('/signup', (req, res) => {
   var user = req.body.user
-  console.log(user)
-  console.log(req.body)
   let newUser = new User({
     email: user.email,
     password: user.password

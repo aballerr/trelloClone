@@ -1,6 +1,7 @@
 .container {
     width: 30%;
-    transform: translateY(40%)
+    transform: translateY(40%);
+    text-align: center;
 }
 
 button {
@@ -21,9 +22,9 @@ h1 {
     
 }
 
-.link{
+a {
     text-decoration: underline;
-    color: #0084FF;
+    color: #8BBDD9;
     cursor: pointer;
 }
 
