@@ -11,16 +11,16 @@ import * as autosize from 'autosize';
   styleUrls: ['./lists.component.css']
 })
 export class ListsComponent implements OnInit {
-  private board: Object;
-  private boardName: string;
-  private boardID: string;
-  private lists;
-  private visible = false;
-  private showAddNewListButton = false;
-  private newListName: string;
-  private placeholderText = "Add a list title..."
+  board: Object;
+  boardName: string;
+  boardID: string;
+  lists;
+  visible = false;
+  showAddNewListButton = false;
+  newListName: string;
+  placeholderText = "Add a list title..."
 
-  constructor(private authService: AuthService, private networkCommandsService: NetworkCommandsService, private router: Router) {
+  constructor(public authService: AuthService,public networkCommandsService: NetworkCommandsService,public router: Router) {
 
   }
 
@@ -78,7 +78,7 @@ export class ListsComponent implements OnInit {
   }
 
   updateList(list) {
-    
+
 
     if (list.nextItem == undefined) { }
     else if (list.nextItem.replace(' ', '') == "") { }

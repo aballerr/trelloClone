@@ -3,6 +3,7 @@ import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../../environments/environment';
 
 
 const helper = new JwtHelperService();
@@ -13,16 +14,14 @@ export class AuthService {
 
   authToken: any;
   user: any;
-  //private url: string = "/users";
-  private url: string = "http://localhost:3000/users"
+  
+  private url: string = environment.url;
   private signUpURL = this.url + '/signup';
   private authenticateURL = this.url + '/authenticate';
   private profileURL = this.url + '/profile';
 
 
-  constructor(private http: Http) {
-
-  }
+  constructor(private http: Http) { }
 
   registerUser(user) {
   

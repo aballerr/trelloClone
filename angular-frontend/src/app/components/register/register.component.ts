@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  private email: String;
-  private password: String;
+  email: String;
+  password: String;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.registerUser(user).subscribe(data => {
       console.log(data.success);
-      if (data.success){
+      if (data.success) {
         this.router.navigate(['/login'])
       }
     })

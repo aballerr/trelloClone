@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 import { map }  from 'rxjs/operators';
 
 
@@ -9,8 +10,8 @@ import { map }  from 'rxjs/operators';
 })
 export class NetworkCommandsService {
 
-  //private url: string = "/users";
-  private url: string = "http://localhost:3000/users"
+
+  private url: string = environment.url;
   private boardURL: string = this.url + "/boards";
   private listURL: string = this.boardURL + "/lists";
   authToken: any;
@@ -21,7 +22,6 @@ export class NetworkCommandsService {
   loadToken(){
     this.authToken = localStorage.getItem('access_token');
   }
-
 
   postBoard(boardName){
     let headers = new Headers();

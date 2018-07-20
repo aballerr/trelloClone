@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private email: String;
-  private password: String;
+  email: String;
+  password: String;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
 
 
 
-  clear(){
+  clear() {
     this.authService.logout()
     this.authService.loadToken();
-  }  
+  }
 
   loginUser() {
     var user = {
@@ -33,20 +33,20 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.authenticateUser(user).subscribe(data => {
-   
 
-      if(data.success){
+
+      if (data.success) {
         this.authService.storeUserData(data.token, data.user);
         this.authService.loadToken();
         this.router.navigate(['/dashboard'])
-        
+
 
       }
       else {
         this.email = null;
         this.password = null;
       }
-    
+
     })
 
   }

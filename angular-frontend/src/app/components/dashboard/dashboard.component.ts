@@ -10,13 +10,13 @@ import * as $ from 'jquery';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  private boards = [];
-  private images = ["camera", "desk", "face", "flowers", "new-york", "tattoo"]
-  private boardName: String;
-  private imagesUsed = {};
+   boards = [];
+   images = ["camera", "desk", "face", "flowers", "new-york", "tattoo"]
+   boardName: String;
+   imagesUsed = {};
 
-  constructor(private router: Router,  private authService: AuthService,
-    private networkCommandsService: NetworkCommandsService) { }
+  constructor(private router: Router,public authService: AuthService,
+     private networkCommandsService: NetworkCommandsService) { }
 
   ngOnInit() {
     var profile = this.authService.getProfile().subscribe(data => {
