@@ -49,6 +49,9 @@ export class DashboardComponent implements OnInit {
     if (this.boardName == undefined) {
       console.log("empty");
     }
+    else if (this.boardName.replace(' ', '') == ''){
+      console.log("empty");
+    }
     else {
 
       this.networkCommandsService.postBoard(this.boardName).subscribe(data => {

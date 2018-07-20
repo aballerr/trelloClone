@@ -13,8 +13,8 @@ export class AuthService {
 
   authToken: any;
   user: any;
-  private url: string = "/users";
-  //private url: string = "http://localhost:3000/users"
+  //private url: string = "/users";
+  private url: string = "http://localhost:3000/users"
   private signUpURL = this.url + '/signup';
   private authenticateURL = this.url + '/authenticate';
   private profileURL = this.url + '/profile';

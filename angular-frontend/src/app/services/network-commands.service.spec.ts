@@ -1,11 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
-
+import { HttpModule } from '@angular/http'
 import { NetworkCommandsService } from './network-commands.service';
+import { AuthService } from './auth.service';
 
 describe('NetworkCommandsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NetworkCommandsService]
+      providers: [NetworkCommandsService, AuthService],
+      imports: [
+        HttpModule
+      ]
     });
   });
 

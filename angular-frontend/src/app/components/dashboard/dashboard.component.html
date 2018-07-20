@@ -18,10 +18,8 @@
   <div (click)="toggleAddBoard()" class="add-board">
     <span (click)="toggleAddBoard()" id="exit">x</span>
     <div class="flex-column">
-      <input [(ngModel)]="boardName" type="text" placeholder="Add board title">
+      <input [(ngModel)]="boardName" type="text" placeholder="Add board title...">
       <button (click)="addBoard()">Create Board</button>
     </div>
   </div>
-
-
 </div>

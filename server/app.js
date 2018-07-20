@@ -26,17 +26,19 @@ app.use('/users', users);
 app.use('/users/boards', lists);
 app.use('/users', boards)
 
-//Connection to MongoDB
-// mongoose.connect(databaseConfig.dockerDatabase)
-// var db = mongoose.connection
-// db.on('error', console.error.bind(console, 'mongodb connection error'))
+// Connection to MongoDB
+mongoose.connect(databaseConfig.database)
+var db = mongoose.connection
+db.on('error', console.error.bind(console, 'mongodb connection error'))
 
-app.use(express.static(path.join(__dirname, '../angular-frontend/dist/angular-frontend')));
 
-app.get('*', (req, res) => {
+//For production
+// app.use(express.static(path.join(__dirname, '../angular-frontend/dist/angular-frontend')));
 
-  res.sendFile(path.join(__dirname, '../angular-frontend/dist/angular-frontend/index.html'));
-});
+// app.get('*', (req, res) => {
+
+//   res.sendFile(path.join(__dirname, '../angular-frontend/dist/angular-frontend/index.html'));
+// });
 
 app.listen(port, () => {
   console.log("listening on port : " + port)

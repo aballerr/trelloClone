@@ -9,8 +9,8 @@ import { map }  from 'rxjs/operators';
 })
 export class NetworkCommandsService {
 
-  private url: string = "/users";
-  //private url: string = "http://localhost:3000/users"
+  //private url: string = "/users";
+  private url: string = "http://localhost:3000/users"
   private boardURL: string = this.url + "/boards";
   private listURL: string = this.boardURL + "/lists";
   authToken: any;
