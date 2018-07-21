@@ -1,10 +1,13 @@
 version: '2'
 
+
+#The primary purpose of this dockerfile is to simply building for production.
+#It allows me to simply run docker-compose up and let docker take care of everything else
 services:
-  angular: # name of the first service
-    build: angular-frontend # specify the directory of the Dockerfile
-    ports:
-      - "4200:4200"
+  # angular: 
+  #   build: angular-frontend 
+  #   volumes:
+  #     - ./angular-frontend:/usr/src/app
   express:
     build: server
     volumes:

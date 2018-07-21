@@ -7,7 +7,8 @@ const passport = require('passport')
 const cors = require('cors');
 const path = require('path');
 const port = 3000;
-
+const prod = process.argv[2];
+const database = prod === 'true' ? databaseConfig.dockerDatabase : databaseConfig.database;
 
 //Initializing Middleware
 app.use(bodyParser())
@@ -27,18 +28,20 @@ app.use('/users/boards', lists);
 app.use('/users', boards)
 
 //Connection to MongoDB
-mongoose.connect(databaseConfig.database)
+mongoose.connect(database)
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'mongodb connection error'))
 
 
 //For production
-// app.use(express.static(path.join(__dirname, '../angular-frontend/dist/angular-frontend')));
+if (prod) {
+  app.use(express.static(path.join(__dirname, './public')));
 
-// app.get('*', (req, res) => {
+  app.get('*', (req, res) => {
 
-//   res.sendFile(path.join(__dirname, '../angular-frontend/dist/angular-frontend/index.html'));
-// });
+    res.sendFile(path.join(__dirname, './public/index.html'));
+  });
+}
 
 app.listen(port, () => {
   console.log("listening on port : " + port)
