@@ -1,3 +1,4 @@
+
 <div class="wrap">
   <h1>{{boardName}}</h1>
   <div class="lists" *ngFor="let list of lists">
@@ -7,6 +8,7 @@
         <div class="item">
           <textarea (keydown)="resize($event)" rows="1" class="list-textarea" [(ngModel)]="list.items[i]"></textarea>
         </div>
+
       </div>
       <div class="new-item">
         <textarea [(ngModel)]="list.nextItem" (focus)="showButton(list, $event)" (focusout)="showButton(list, $event)" (keydown)="resize($event)"
@@ -14,6 +16,7 @@
       </div>
       <button (mousedown)="updateList(list)" class="add-button" *ngIf="list.showAddButton"> Add Card</button>
     </div>
+
   </div>
   <div class="add lists list">
     <textarea [(ngModel)]="newListName" (focus)="toggleShow()" (focusout)="toggleShow()" class="add-textarea" rows="1" placeholder="+ Add another list"></textarea>

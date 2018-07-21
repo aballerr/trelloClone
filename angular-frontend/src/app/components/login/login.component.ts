@@ -19,11 +19,6 @@ export class LoginComponent implements OnInit {
 
 
 
-  clear() {
-    this.authService.logout()
-    this.authService.loadToken();
-  }
-
   loginUser() {
     var user = {
       user: {
@@ -33,20 +28,17 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.authenticateUser(user).subscribe(data => {
+   
+      if(data.success){
 
-
-      if (data.success) {
         this.authService.storeUserData(data.token, data.user);
         this.authService.loadToken();
-        this.router.navigate(['/dashboard'])
-
-
+        this.router.navigate(['/'])
       }
       else {
         this.email = null;
         this.password = null;
       }
-
     })
 
   }

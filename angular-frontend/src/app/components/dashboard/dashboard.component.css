@@ -34,17 +34,19 @@
     font-size: 16px;
     background-color: lightcyan;
     cursor: pointer;
+    filter: grayscale(40%);
     
 }
 
 .board:hover {
-   
-    background: none;
+    
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    filter: grayscale(100%);
     transition: box-shadow 0.5;
-
+    color: black;
 
 }
+
 
 
 
@@ -53,10 +55,12 @@ label {
     margin-top: 10px;
     font-size: 20px;
     font-weight: bold;
+    color: white;
 }
 
 .container {
     margin-top: 100px;
+
 }
 
 .create {
@@ -65,6 +69,7 @@ label {
     padding-top: 40px;
     cursor: pointer;
 }
+
 
 .create:hover {
     color: black;
@@ -91,17 +96,16 @@ label {
     font-size: 24px;
     top: 15%;
     padding: 30px;
+    width: 400px;
+    height: 150px;
     /* background-color:rgba(225,255,255, 0.4); */
-    background: url("../../../assets/images/pillars.jpg");
+    /* background: url("../../../assets/images/flowers.jpg");
+    background-repeat: no-repeat; */
+    background-color: white;
     border-radius: 4px;
 
 }
 
-.add-board::after {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-}
 
 .visible {
     visibility: visible
@@ -116,27 +120,30 @@ button {
     width: 50%;
     font-size: 20px;
     margin-top: 16px;
+    padding: 10px 20px;
     margin-bottom: 0px;
-    opacity: 0.5;
+    color: white;
     cursor: pointer;
     border-radius: 4px;
     outline: none;
     border: none;
     user-select: none;
+    background-color: #61BD4F;;
 }
 
 button:hover {
-    background-color: white;
+    background-color: #49852E;
 }
 
 input {
     font-weight: bold;
     opacity: 1.0;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0.0);
     outline: none;
     border: none;
-    color: white;
+    color: black;
     padding-left: 10px;
+    box-shadow: 3px 3px 3px 3px lightgray;
 }
 
 input:hover {
@@ -144,7 +151,7 @@ input:hover {
 }
 
 input::placeholder {
-    color: white;
+    color: lightgray;
 }
 
 #exit {
@@ -152,15 +159,18 @@ input::placeholder {
     right: 10px;
     top: -6px;
     font-size: 26px;
-    color: white;
+    color: black;
     cursor: pointer;
 }
 
 h5 {
     margin-bottom: 20px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 40px;
+    color: white;
 }
+
+
 
 /* simple image background */
 

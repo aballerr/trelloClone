@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from '../../services/auth.service';
+import { HttpModule } from '@angular/http';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +11,15 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [ DashboardComponent ],
+      imports: [
+        FormsModule,
+        RouterTestingModule,
+        HttpModule
+      ],
+      providers: [
+        AuthService
+      ]
     })
     .compileComponents();
   }));
